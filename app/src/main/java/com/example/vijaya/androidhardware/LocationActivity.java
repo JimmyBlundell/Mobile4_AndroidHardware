@@ -73,7 +73,7 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
             }
         };
 
-        LatLng userCurrentLocationCorodinates = null;
+        LatLng userCurrentLocationCoordinates = null;
         double latitude = 0, longitude = 0;
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED && ActivityCompat
@@ -89,10 +89,10 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
             if(location1 != null){
                 latitude = location1.getLatitude();
                 longitude = location1.getLongitude();
-                userCurrentLocationCorodinates = new LatLng(latitude, longitude);
+                userCurrentLocationCoordinates = new LatLng(latitude, longitude);
             }
         } else if(!userCurrentLocation.isProviderEnabled(LocationManager.GPS_PROVIDER)){
-            alertMessage();
+            alert();
         }
 
         //Getting the current location of the user.
@@ -110,14 +110,14 @@ public class LocationActivity extends AppCompatActivity implements OnMapReadyCal
             ex.printStackTrace();
         }
         //Setting our image as the marker icon.
-        mMap.addMarker(new MarkerOptions().position(userCurrentLocationCorodinates)
+        mMap.addMarker(new MarkerOptions().position(userCurrentLocationCoordinates)
                 .title("Your current address.").snippet(userAddress.toString())
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_maps)));
         //Setting the zoom level of the map.
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userCurrentLocationCorodinates, 7));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userCurrentLocationCoordinates, 7));
     }
 
-    protected void alertMessage(){
+    protected void alert(){
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Need to allow location services!").setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
